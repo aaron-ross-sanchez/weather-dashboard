@@ -9,7 +9,7 @@
 <br>
 index.html 
 <br>
-<img src="./Assets/Planning/Wireframe - Index.png" alt="index wireframe" width="300" height=auto>
+<img src="" alt="index wireframe" width="300" height=auto>
 
 
 <strong>High Fidelity Model</strong>

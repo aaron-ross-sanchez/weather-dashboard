@@ -1,0 +1,30 @@
+.header {
+    border: 2px dashed red;
+    display: flex;
+    justify-content: center;
+}
+
+.name {
+    border: 2px dashed blue;
+}
+
+.title {
+    font-size: 24px;
+    padding: 10px;
+}
+
+.main {
+    border: 2px dashed black;
+}
+
+.search {
+    border: 2px dashed purple;
+}
+
+.current {
+    border: 2px dashed orange;
+}
+
+.fiveDay {
+    border: 2px dashed pink;
+}
