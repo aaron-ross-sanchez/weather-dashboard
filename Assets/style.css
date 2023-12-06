@@ -4,27 +4,106 @@
     justify-content: center;
 }
 
-.name {
-    border: 2px dashed blue;
-}
-
-.title {
-    font-size: 24px;
-    padding: 10px;
-}
-
 .main {
     border: 2px dashed black;
+    height: 80vh;
+    margin-top: 10px;
+    /* display: flex; */
 }
 
-.search {
+.container {
     border: 2px dashed purple;
+    height: 70vh;
+    margin: 10px;
+    display: flex;
 }
 
-.current {
-    border: 2px dashed orange;
+.search-container {
+    border: 2px dashed darkgoldenrod;
+    display: flex;
+    /* flex-grow: 1; */
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    /*YOU WILL NEED TO CHANGE THIS PROBABLY*/
+    /* width: 400px; */
+    margin: 20px;
 }
 
-.fiveDay {
-    border: 2px dashed pink;
+.search-title {
+
 }
+
+.city-search {
+    margin-bottom: 10px;
+    border: 1px solid black;
+}
+
+.submit-btn {
+    margin: 10px;
+}
+
+.divider {
+    border-bottom: 5px solid black;
+    border-radius: 25px;
+    width: 350px;
+    margin: 10px;
+}
+
+.current-city-container {
+    border: 2px dashed blue;
+    margin: 20px;
+    flex-grow: 5;
+    display: flex;
+    flex-direction: column;
+}
+
+.current-day-container {
+    border: 2px dashed green;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.date-container {
+    border: 2px dashed black;
+    display: flex;
+    margin: 10px;
+    align-items: center;
+}
+
+.current-date {
+    padding-left: 20px;
+    /*MIGHT NEED TO DEBUG THIS*/
+    margin-right: 50px;
+}
+
+.info-container {
+    border: 2px dashed red;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+}
+
+.forecast-container {
+    border: 2px dashed red;
+    margin: 10px
+}
+
+.forcast-title-container {
+    border: 2px dashed darkblue;
+    margin: 10px;
+}
+
+.forecast-title {
+    border: 2px dashed purple;
+    margin: 10px;
+    padding-left: 20px;
+}
+.forecast-cards {
+    border: 2px dashed black;
+    margin: 10px;
+    height: 150px;
+}
+

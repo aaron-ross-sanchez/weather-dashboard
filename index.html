@@ -8,23 +8,41 @@
 </head>
 
 <header class="header">
-    <div class="name">
-        <p class="title">Weather Dashboard</p>
-    </div>
+        <h1 class="title">Weather Dashboard</h1>
 </header>
 
 <body>
     <main class="main">
-        <section class="search">
+        <section class="container">
+            <section class="search-container">
+                <h2 class="search-title">Search for a City:</h2>
+                <input type="text" name="city-search" id="city-search" class="city-search">
+                <button type="submit" class="submit-btn">Submit</button>
+                <div class="divider"></div>
+                <div class="search-history-container"></div>
+            </section>
 
-        </section>
+            <section class="current-city-container">
+                <section class="current-day-container">
+                    <section class="date-container">
+                        <h2 class="current-date">City MM/DD/YYYY</h2>
+                        <div class="icon">Icon</div>
+                    </section>
+                    <section class="info-container">
+                        <p>Temperature:</p>
+                        <p>Wind:</p>
+                        <p>Humidity:</p>
+                    </section>
+                </section>
+                <section class="forecast-container">
+                    <section class="forecast-title">
+                        <h2>5-Day Forecast:</h2>
+                    </section>
+                    <div class="forecast-cards">
 
-        <section class="current">
-
-        </section>
-
-        <section class="fiveDay">
-            
+                    </div>
+                </section>
+            </section>
         </section>
     </main>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
