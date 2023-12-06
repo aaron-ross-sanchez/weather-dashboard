@@ -6,14 +6,12 @@
 
 .main {
     border: 2px dashed black;
-    height: 80vh;
     margin-top: 10px;
     /* display: flex; */
 }
 
 .container {
     border: 2px dashed purple;
-    height: 70vh;
     margin: 10px;
     display: flex;
 }
@@ -56,6 +54,7 @@
     flex-grow: 5;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
 }
 
 .current-day-container {
@@ -88,7 +87,7 @@
 
 .forecast-container {
     border: 2px dashed red;
-    margin: 10px
+    margin: 10px;
 }
 
 .forcast-title-container {
@@ -104,6 +103,14 @@
 .forecast-cards {
     border: 2px dashed black;
     margin: 10px;
-    height: 150px;
+    display: flex;
+    justify-content: space-around;
 }
 
+.five-day-cards {
+    border: 2px dashed green;
+    margin: 10px;
+    padding: 0px 30px;
+    display: flex;
+    flex-direction: column;
+}
