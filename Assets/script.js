@@ -1,12 +1,52 @@
 //https://www.w3schools.com/js/js_api_fetch.asp
 //city will be chosen by the user
-const city = 'Austin'; 
+const city = ''; 
 //apiKey will be deleted after grading is completed
 const apiKey = '6b85b5521cb7b577a6e51b36f03923b2';
 
-function celsiusToFahrenheit(celsius) {
-  return (celsius * 9 / 5) + 32;
+function kelvinToFahrenheit(kelvin) {
+  return ((kelvin - 273.15) * 9 / 5) + 32;
 }
+
+function metersPerSecondToMilesPerHour(mps) {
+  return (mps * 2.23694);
+}
+
+function convertUnixtoDateTime(unixTimestamp) {
+  const milliseconds = unixTimestamp * 1000;
+  const dateObject = new Date(milliseconds);
+
+  const year = dateObject.getFullYear();
+  const month = ('0' + (dateObject.getMonth() + 1)).slice(-2);
+  const day = ('0' + dateObject.getDate()).slice(-2);
+
+  const formattedDate = `${month}/${day}/${year}`;
+
+  return formattedDate;
+}
+
+// function getCitySuggestions(inputValue) {
+//   return fetch(`https://api.openweathermap.org/data/2.5/find?q=${inputValue}&type=like&appid=${apiKey}`)
+//     .then(response => {
+//       if(!response.ok) {
+//         throw new Error('Error');
+//       }
+//       return response.json();
+//     })
+//     .then(data => {
+//       return data.list.map(city => city.name);
+//     })
+//     .catch(error => {
+//       console.error(error);
+//       return [];
+//     });
+// }
+
+// $('#city-search').on('input', function() {
+//   city = $(this).val().trim();
+//   console.log('City:', city);
+// })
+
 
 //This is the function to get the current weather from the api
 //It has two parameters, the city and apiKey
@@ -66,31 +106,33 @@ async function displayWeather() {
   //will log the entire data received from the getWeather function
   console.log(weatherData);
 
-  //this is a checklist of things I need to include in this api display call
-  //City
-  //Date
-  //Current Icon of Weather
-  //Temperature
-  //Wind
-  //Humidity
-
   if (weatherData) {
     //This is object deconstruction and a way to pull out specific values from the weatherData object and is assigning those values to those variables
     const { name, dt, main, weather, wind } = weatherData;
-    const temperatureInCelsius = main.temp;
-    const temperatureToFahrenheit = celsiusToFahrenheit(temperatureInCelsius);
+    const temperatureInKelvin = main.temp;
+    const temperatureToFahrenheit = kelvinToFahrenheit(temperatureInKelvin);
+    const speedInMetersPerSecond = wind.speed;
+    const speedToMilesPerHour = metersPerSecondToMilesPerHour(speedInMetersPerSecond);
+    const iconUrl = `http://openweathermap.org/img/w/${weather[0].icon}.png`
+    const formattedDate = convertUnixtoDateTime(dt);
 
     //This is a test to the console to pull the data that I need
     currentCity.text(name);
     console.log("Name:", name);
-    currentDate.text(dt);
+
+    currentDate.text(formattedDate);
     console.log("Date:", dt);
-    currentIcon.text(weather[0].icon);
+
+    currentIcon.html(`<img src="${iconUrl}" alt="WeatherIcon">`);
     console.log("Icon:", weather[0].icon);
-    currentTemperature.text(temperatureToFahrenheit);
+    currentTemperature.text(temperatureToFahrenheit.toFixed(2));
     console.log("Temperature:", main.temp);
-    currentWind.text(wind.speed);
+    console.log("Temperature In Kelvin:", temperatureInKelvin);
+    console.log("Temperature In Fahrenheit:", temperatureToFahrenheit);
+    currentWind.text(speedToMilesPerHour.toFixed(2));
     console.log("Wind Speed:", wind.speed);
+    console.log("Speed in Meters Per Second:", speedInMetersPerSecond);
+    console.log("Speed in Miles Per Hour:", speedToMilesPerHour);
     currentHumidity.text(main.humidity);
     console.log("Humidity:", main.humidity);
   }
@@ -132,84 +174,46 @@ async function displayForecast() {
   const forecastData = await getForecast(city, apiKey);
   //will log the data from the getWeather function
   console.log(forecastData);
-
-  //this is a checklist of things I need to include in the forecast api display call
-  //Date
-  //Current Icon of Weather
-  //Temperature
-  //Wind
-  //Humidity
-
+  
   if (forecastData) {
-    const { city, list } = forecastData;
+    const { list } = forecastData;
     console.log("Name:", city.name);
 
-    //dayOne
-    dayOneDate.text(list[6].dt_txt);
-    console.log("Day 1 Forecast:", list[6].dt_txt);
-    dayOneIcon.text(list[6].weather[0].icon);
-    console.log("Icon:", list[6].weather[0].icon);
-    dayOneTemp.text(list[6].main.temp);
-    console.log("Temperature:", list[6].main.temp);
-    dayOneWind.text(list[6].wind.speed);
-    console.log("Wind Speed:", list[6].wind.speed);
-    dayOneHumidity.text(list[6].main.humidity);
-    console.log("Humidity:", list[6].main.humidity);
+    function updateForecast(timeIndex, dateElement, iconElement, tempElement, windElement, humidityElement) {
+      const day = list[timeIndex];
+      const formattedDate = convertUnixtoDateTime(day.dt);
 
-    //dayTwo
-    dayTwoDate.text(list[14].dt_txt);
-    console.log("Day 2 Forecast:", list[14].dt_txt);
-    dayTwoIcon.text(list[14].weather[0].icon);
-    console.log("Icon:", list[14].weather[0].icon);
-    dayTwoTemp.text(list[14].main.temp);
-    console.log("Temperature:", list[14].main.temp);
-    dayTwoWind.text(list[14].wind.speed);
-    console.log("Wind Speed:", list[14].wind.speed);
-    dayTwoHumidity.text(list[14].main.humidity);
-    console.log("Humidity:", list[14].main.humidity);
+      dateElement.text(formattedDate);
+      // iconElement.text(day.weather[0].icon);
+      // tempElement.text(day.main.temp);
+      // windElement.text(day.wind.speed);
+      humidityElement.text(day.main.humidity);
 
-    //dayThree
-    dayThreeDate.text(list[22].dt_txt);
-    console.log("Day 3 Forecast:", list[22].dt_txt);
-    dayThreeIcon.text(list[22].weather[0].icon);
-    console.log("Icon:", list[22].weather[0].icon);
-    dayThreeTemp.text(list[22].main.temp);
-    console.log("Temperature:", list[22].main.temp);
-    dayThreeWind.text(list[22].wind.speed);
-    console.log("Wind Speed:", list[22].wind.speed);
-    dayThreeHumidity.text(list[22].main.humidity);
-    console.log("Humidity:", list[22].main.humidity);
+      //This is where I found this link: https://stackoverflow.com/questions/44177417/how-to-display-openweathermap-weather-icon
+      const iconUrl = `http://openweathermap.org/img/w/${day.weather[0].icon}.png`
+      iconElement.html(`<img src="${iconUrl}" alt="WeatherIcon">`);
 
-    //dayFour
-    dayFourDate.text(list[30].dt_txt);
-    console.log("Day 4 Forecast:", list[30].dt_txt);
-    dayFourIcon.text(list[30].weather[0].icon);
-    console.log("Icon:", list[30].weather[0].icon);
-    dayFourTemp.text(list[30].main.temp);
-    console.log("Temperature:", list[30].main.temp);
-    dayFourWind.text(list[30].wind.speed);
-    console.log("Wind Speed:", list[30].wind.speed);
-    dayFourHumidity.text(list[30].main.humidity);
-    console.log("Humidity:", list[30].main.humidity);
+      const forecastTempInKelvin = day.main.temp;
+      const forecastTempToFahrenheit = kelvinToFahrenheit(forecastTempInKelvin);
+      tempElement.text(forecastTempToFahrenheit.toFixed(2));
 
-    //dayFive
-    dayFiveDate.text(list[38].dt_txt);
+      const forecastWindInMts = day.wind.speed;
+      const forecastWindToMps = metersPerSecondToMilesPerHour(forecastWindInMts);
+      windElement.text(forecastWindToMps.toFixed(2));
+    }
 
-    console.log("Day 5 Forecast:", list[38].dt_txt);
-    dayFiveIcon.text(list[38].weather[0].icon);
+    updateForecast(6, dayOneDate, dayOneIcon, dayOneTemp, dayOneWind, dayOneHumidity);
+    updateForecast(14, dayTwoDate, dayTwoIcon, dayTwoTemp, dayTwoWind, dayTwoHumidity);
+    updateForecast(22, dayThreeDate, dayThreeIcon, dayThreeTemp, dayThreeWind, dayThreeHumidity);
+    updateForecast(30, dayFourDate, dayFourIcon, dayFourTemp, dayFourWind, dayFourHumidity);
+    updateForecast(38, dayFiveDate, dayFiveIcon, dayFiveTemp, dayFiveWind, dayFiveHumidity);
 
-    console.log("Icon:", list[38].weather[0].icon);
-    dayFiveTemp.text(list[38].main.temp);
-
-    console.log("Temperature:", list[38].main.temp);
-    dayFiveWind.text(list[38].wind.speed);
-
-    console.log("Wind Speed:", list[38].wind.speed);
-    dayFiveHumidity.text(list[38].main.humidity);
-
-    console.log("Humidity:", list[38].main.humidity);
   }
 }
+
+displayWeather();
+
+displayForecast();
 
 // getWeather(city, apiKey)
 //   .then(data => {
@@ -219,7 +223,6 @@ async function displayForecast() {
 //     console.log(error);
 //   });
 
-displayWeather();
 
 
 // getForecast(city, apiKey)
@@ -230,6 +233,5 @@ displayWeather();
 //     console.log(error);
 //   });
 
-displayForecast();
 
 
