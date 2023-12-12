@@ -86,7 +86,7 @@
 }
 
 .forecast-container {
-    border: 2px dashed red;
+    border: 2px dashed green;
     margin: 10px;
 }
 
@@ -96,20 +96,21 @@
 }
 
 .forecast-title {
-    border: 2px dashed purple;
+    border: 2px dashed black;
     margin: 10px;
     padding-left: 20px;
 }
 
 .forecast-cards {
-    border: 2px dashed black;
+    border: 2px dashed red;
     margin: 10px;
     display: flex;
     justify-content: space-evenly;
 }
 
 .five-day-cards {
-    border: 2px dashed green;
+    border: 2px solid black;
+    border-radius: 25px;
     margin: 10px;
     padding: 0px 25px;
     display: flex;
