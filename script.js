@@ -1,6 +1,6 @@
 //https://www.w3schools.com/js/js_api_fetch.asp
 //city will be chosen by the user
-const city = 'Austin'; 
+const city = ''; 
 //apiKey will be deleted after grading is completed
 const apiKey = '6b85b5521cb7b577a6e51b36f03923b2';
 
@@ -25,27 +25,60 @@ function convertUnixtoDateTime(unixTimestamp) {
   return formattedDate;
 }
 
-// function getCitySuggestions(inputValue) {
-//   return fetch(`https://api.openweathermap.org/data/2.5/find?q=${inputValue}&type=like&appid=${apiKey}`)
-//     .then(response => {
-//       if(!response.ok) {
-//         throw new Error('Error');
-//       }
-//       return response.json();
-//     })
-//     .then(data => {
-//       return data.list.map(city => city.name);
-//     })
-//     .catch(error => {
-//       console.error(error);
-//       return [];
-//     });
-// }
+//This will end up running the program
+$('.submit-btn').click(function(event) {
+  event.preventDefault();
+  const cityInput = document.getElementById('city-search').value;
+  
+  const city = cityInput;
+
+  let savedCities = JSON.parse(localStorage.getItem('savedCities')) || [];
+
+  if(!savedCities.includes(city)) {
+    savedCities.unshift(city);
+    localStorage.setItem('savedCities', JSON.stringify(savedCities));
+  }
+
+  console.log('Selected city:', city);
+  displayWeather(city);
+  displayForecast(city);
+  displaySavedCities();
+});
+
+function displaySavedCities() {
+  const savedCities = JSON.parse(localStorage.getItem('savedCities')) || [];
+  const savedCitiesDiv = $('.search-history-container');
+  savedCitiesDiv.empty();
+
+  savedCities.forEach(function(city) {
+    const cityElement = $('<div class="saved-city">' + city + '</div>');
+    cityElement.click(function() {
+      cityElement.val(city);
+      
+      displayWeather(city);
+      displayForecast(city);
+      console.log('Getting Forecast For:', city);
+    });
+    savedCitiesDiv.append(cityElement);
+  });
+}
+
+displaySavedCities();
 
 // $('#city-search').on('input', function() {
-//   city = $(this).val().trim();
-//   console.log('City:', city);
-// })
+//   const city = $(this).val();
+//   localStorage.setItem('currentCity', city);
+
+//   let savedCities = JSON.parse(localStorage.getItem('savedCities')) || [];
+//   if (!savedCities.includes(city)) {
+//     savedCities.push(city);
+//     localStorage.setItem('savedCities', JSON.stringify(savedCities));
+//     displaySavedCities();
+//   }
+// });
+
+
+
 
 
 //This is the function to get the current weather from the api
@@ -100,7 +133,7 @@ const currentHumidity = $('#currentHumidity');
 
 //this is the function to displayWeather
 //used a async function to use await keyword
-async function displayWeather() {
+async function displayWeather(city) {
   //used await to make sure the getWeather function will finish before assigning its value
   const weatherData = await getWeather(city, apiKey);
   //will log the entire data received from the getWeather function
@@ -169,7 +202,7 @@ const dayFiveTemp = $('#dayFiveTemp');
 const dayFiveWind = $('#dayFiveWind');
 const dayFiveHumidity = $('#dayFiveHumidity');
 
-async function displayForecast() {
+async function displayForecast(city) {
   //used await to make sure the getWeather function will finish before assigning its value
   const forecastData = await getForecast(city, apiKey);
   //will log the data from the getWeather function
