@@ -1,6 +1,6 @@
 //https://www.w3schools.com/js/js_api_fetch.asp
 //city will be chosen by the user
-const city = ''; 
+const city = 'Austin'; 
 //apiKey will be deleted after grading is completed
 const apiKey = '6b85b5521cb7b577a6e51b36f03923b2';
 
