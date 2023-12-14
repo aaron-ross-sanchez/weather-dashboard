@@ -51,7 +51,7 @@ function displaySavedCities() {
   savedCitiesDiv.empty();
 
   savedCities.forEach(function(city) {
-    const cityElement = $('<div class="saved-city">' + city + '</div>');
+    const cityElement = $('<button class="saved-city">' + city + '</button>');
     cityElement.click(function() {
       cityElement.val(city);
       
