@@ -9,14 +9,14 @@
 <br>
 index.html 
 <br>
-<img src="" alt="index wireframe" width="300" height=auto>
+<img src="./Assets/Planning/Wireframe - Index.png" alt="index wireframe" width="300" height=auto>
 
 
 <strong>High Fidelity Model</strong>
 <br>
 index.html 
 <br>
-<img src="" alt="index high fidelity" width="300" height=auto>
+<img src="/Assets/Planning/HiFi - Index.png" alt="index high fidelity" width="300" height=auto>
 
 
 ## Usage
@@ -25,7 +25,7 @@ index.html
 <br>
 index.html 
 <br>
-<img src="" alt="index deployed" width="300" height=auto>
+<img src="/Assets/Planning/HiFi w: html.png" alt="index deployed" width="300" height=auto>
 
 You can access the deployed application <a href="">here</a>.
 
