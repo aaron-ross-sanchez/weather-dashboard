@@ -244,9 +244,9 @@ async function displayForecast(city) {
   }
 }
 
-displayWeather();
+// displayWeather();
 
-displayForecast();
+// displayForecast();
 
 // getWeather(city, apiKey)
 //   .then(data => {
