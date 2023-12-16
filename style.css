@@ -79,7 +79,7 @@ html {
 }
 
 .divider {
-    border-bottom: 5px solid black;
+    border-bottom: 5px solid var(--dark-blue);;
     border-radius: 25px;
     width: 75%;
     margin: 10px;
